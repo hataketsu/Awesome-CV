@@ -1,18 +1,5 @@
 %!TEX TS-program = xelatex
 %!TEX encoding = UTF-8 Unicode
-% Awesome CV LaTeX Template for CV/Resume
-%
-% This template has been downloaded from:
-% https://github.com/posquit0/Awesome-CV
-%
-% Author:
-% Claud D. Park <posquit0.bj@gmail.com>
-% http://www.posquit0.com
-%
-% Template license:
-% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
-%
-
 
 %-------------------------------------------------------------------------------
 % CONFIGURATIONS
@@ -29,22 +16,10 @@
 % Color for highlights
 % Awesome Colors: awesome-emerald, awesome-skyblue, awesome-red, awesome-pink, awesome-orange
 %                 awesome-nephritis, awesome-concrete, awesome-darknight
-\colorlet{awesome}{awesome-emerald}
-% Uncomment if you would like to specify your own color
-% \definecolor{awesome}{HTML}{CA63A8}
-
-% Colors for text
-% Uncomment if you would like to specify your own color
-% \definecolor{darktext}{HTML}{414141}
-% \definecolor{text}{HTML}{333333}
-% \definecolor{graytext}{HTML}{5D5D5D}
-% \definecolor{lighttext}{HTML}{999999}
+\colorlet{awesome}{awesome-skyblue}
 
 % Set false if you don't want to highlight section with awesome color
 \setbool{acvSectionColorHighlight}{true}
-
-% If you would like to change the social information separator from a pipe (|) to something else
-\renewcommand{\acvHeaderSocialSep}{\quad\textbar\quad}
 
 
 %-------------------------------------------------------------------------------
@@ -54,26 +29,15 @@
 % Available options: circle|rectangle,edge/noedge,left/right
 % \photo[rectangle,edge,right]{./examples/profile}
 \photo[rectangle,edge,left]{./profile.jpg}
-\name{}{Trịnh Hùng Anh}
-\position{Software Architect{\enskip\cdotp\enskip}Security Expert}
-\address{Thanh Xuân, Hà Nội}
+\name{}{Hung Anh Trinh}
+\position{Software Engineer}
+\address{Nguyen Trai, Thanh Xuan, Ha Noi}
 
 \mobile{(+84) 982288173}
 \email{hunganh.dev@gmail.com}
 \github{https://github.com/hataketsu}
-%\linkedin{posquit0}
-% \gitlab{gitlab-id}
-% \stackoverflow{SO-id}{SO-name}
-% \twitter{@twit}
- \skype{skype-id}
-% \reddit{reddit-id}
-% \medium{madium-id}
-% \googlescholar{googlescholar-id}{name-to-display}
-%% \firstname and \lastname will be used
-% \googlescholar{googlescholar-id}{}
-% \extrainfo{extra informations}
 
-\quote{``To get the things you wanted most, you have to do the things you hated most, scared most."}
+\quote{``Persistence is very important. You should not give up unless you are forced to give up."}
 
 
 %-------------------------------------------------------------------------------
@@ -81,28 +45,25 @@
 
 % Print the header with above personal informations
 % Give optional argument to change alignment(C: center, L: left, R: right)
-\makecvheader[C]
+    \makecvheader[C]
 
 % Print the footer with 3 arguments(<left>, <center>, <right>)
 % Leave any of these blank if they are not needed
-\makecvfooter
-  {\today}
-  {Hùng Anh Trịnh~~~·~~~Résumé}
-  {\thepage}
+    \makecvfooter
+    {\today}
+    {HUNG ANH TRINH ~~~·~~~ RÉSUMÉ}
+    {\thepage}
 
 
 %-------------------------------------------------------------------------------
 %	CV/RESUME CONTENT
 %	Each section is imported separately, open each file in turn to modify content
 %-------------------------------------------------------------------------------
-\input{resume/summary.tex}
-\input{resume/experience.tex}
-\input{resume/honors.tex}
-\input{resume/presentation.tex}
-\input{resume/writing.tex}
-\input{resume/committees.tex}
-\input{resume/education.tex}
-\input{resume/extracurricular.tex}
+    \input{resume/summary.tex}
+    \input{resume/skills.tex}
+    \input{resume/experience.tex}
+    \newpage
+    \input{resume/education.tex}
 
 
 %-------------------------------------------------------------------------------

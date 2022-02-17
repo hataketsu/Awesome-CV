@@ -1,0 +1,4 @@
+version=0.6.0
+typesetter=xelatex
+steps=texpdf
+root=/home/hataketsu/Awesome-CV/examples/resume.tex
