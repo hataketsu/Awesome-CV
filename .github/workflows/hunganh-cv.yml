@@ -1,0 +1,86 @@
+name: Build hunganh CV
+
+on:
+  push:
+    branches:
+      - kube
+      - master
+    paths:
+      - 'hunganh/**'
+      - '.github/workflows/hunganh-cv.yml'
+    tags:
+      - 'cv-v*'
+      - 'v*'
+  pull_request:
+    paths:
+      - 'hunganh/**'
+      - '.github/workflows/hunganh-cv.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Mark workspace safe for git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - name: Build CV PDF
+        working-directory: hunganh
+        run: make
+
+      - name: Rename PDF with branch / tag
+        id: rename
+        working-directory: hunganh
+        run: |
+          set -e
+          REF_NAME="${GITHUB_REF_NAME//\//-}"
+          SHORT_SHA="${GITHUB_SHA::7}"
+          OUT="hunganh-cv-${REF_NAME}-${SHORT_SHA}.pdf"
+          cp build/cv.pdf "$OUT"
+          # Also publish a stable filename for the badge/link in README
+          cp build/cv.pdf hunganh-cv.pdf
+          echo "pdf=$OUT" >> "$GITHUB_OUTPUT"
+          echo "stable=hunganh-cv.pdf" >> "$GITHUB_OUTPUT"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hunganh-cv
+          path: |
+            hunganh/${{ steps.rename.outputs.pdf }}
+            hunganh/${{ steps.rename.outputs.stable }}
+          if-no-files-found: error
+
+      - name: Create / update GitHub Release (on tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            hunganh/${{ steps.rename.outputs.pdf }}
+            hunganh/${{ steps.rename.outputs.stable }}
+
+      - name: Publish rolling "latest" release (on default branches)
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/kube' || github.ref == 'refs/heads/master')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Latest CV
+          tag_name: latest
+          prerelease: false
+          make_latest: true
+          body: |
+            Auto-built CV from `${{ github.ref_name }}` @ ${{ github.sha }}.
+            Latest commit: ${{ github.event.head_commit.message }}
+          files: |
+            hunganh/${{ steps.rename.outputs.pdf }}
+            hunganh/${{ steps.rename.outputs.stable }}

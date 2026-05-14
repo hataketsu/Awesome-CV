@@ -1,13 +1,17 @@
-.PHONY: cv.pdf
+.PHONY: all clean
 
 CC = xelatex
-EXAMPLES_DIR = .
-CV_DIR = ./cv
-CV_SRCS = $(shell find $(CV_DIR) -name '*.tex')
+OUT_DIR = build
+CV_SRCS = cv.tex $(wildcard cv/*.tex)
+PDF = $(OUT_DIR)/cv.pdf
 
-cv.pdf: $(EXAMPLES_DIR)/cv.tex $(CV_SRCS)
-	$(CC) -output-directory=$(EXAMPLES_DIR) $<
-	mv $(EXAMPLES_DIR)/cv.pdf $(EXAMPLES_DIR)/hunganh.dev.pdf
+all: $(PDF)
+
+$(PDF): $(CV_SRCS) awesome-cv.cls $(wildcard fonts/*.ttf) profile.jpg
+	@mkdir -p $(OUT_DIR)
+	$(CC) -interaction=nonstopmode -halt-on-error -output-directory=$(OUT_DIR) cv.tex
+	@# Re-run to resolve page numbers / refs
+	$(CC) -interaction=nonstopmode -halt-on-error -output-directory=$(OUT_DIR) cv.tex
 
 clean:
-	rm -rf $(EXAMPLES_DIR)/*.pdf
+	rm -rf $(OUT_DIR)

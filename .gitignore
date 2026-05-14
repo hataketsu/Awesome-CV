@@ -7,6 +7,13 @@
 *.fls
 *.out
 *.toc
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.nav
+*.snm
+*.xdv
 
 ## Intermediate documents:
 *.dvi
@@ -17,7 +24,13 @@
 .*sw[op]
 *~
 
-### Mac OS X ###
-## Mac OS X metadata files:
+## IDE folders:
+.idea/
+.vscode/
+
+### macOS ###
 *.DS_Store
-.idea
+
+### hunganh build output ###
+## Don't commit built CV PDF — release pipeline publishes it.
+hunganh/*.pdf
