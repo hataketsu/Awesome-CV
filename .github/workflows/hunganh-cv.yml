@@ -39,10 +39,11 @@ jobs:
       - name: Rename PDF with branch / tag
         id: rename
         working-directory: hunganh
+        shell: bash
         run: |
-          set -e
-          REF_NAME="${GITHUB_REF_NAME//\//-}"
-          SHORT_SHA="${GITHUB_SHA::7}"
+          set -euo pipefail
+          REF_NAME="$(printf '%s' "$GITHUB_REF_NAME" | tr '/' '-')"
+          SHORT_SHA="$(printf '%s' "$GITHUB_SHA" | cut -c1-7)"
           OUT="hunganh-cv-${REF_NAME}-${SHORT_SHA}.pdf"
           cp build/cv.pdf "$OUT"
           # Also publish a stable filename for the badge/link in README
