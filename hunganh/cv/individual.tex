@@ -12,6 +12,22 @@
 %---------------------------------------------------------
 
 \cventry
+  {Fullstack / AI Engineer} % Job title
+  {Npay -- Bank Payment Notification Platform} % Organization
+  {Hanoi, Vietnam} % Location
+  {2026} % Date(s)
+  {
+    \begin{cvitems}
+      \item {Sole fullstack engineer—owned the platform end to end: backend, dashboard, mobile app, and infrastructure for a Sepay-compatible system that ingests Vietnamese bank transactions and fans them out to user channels (Telegram, Lark, Zalo, webhooks) and e-commerce plugins; Django 6, django-ninja, Celery, Postgres.}
+      \item {Built the web dashboard with Next.js 16 / React 19 (shadcn-style components, Tailwind) and a companion Expo (React Native) mobile app sharing the same django-ninja API.}
+      \item {Designed and shipped an MCP (Model Context Protocol) server using FastMCP over streamable-HTTP, exposing read-only tools (transactions, accounts, statements) so LLM agents can query a user's banking data on their behalf.}
+      \item {Implemented pure-ASGI bearer-token auth middleware with ContextVar-scoped user resolution to securely isolate per-user data across concurrent MCP tool calls.}
+      \item {Built a platform-agnostic LLM chatbot engine on LangChain/LangGraph with OpenAI models and conversation memory, deployed as a Zalo auto-reply bot for customer support.}
+      \item {Shipped 12 e-commerce/CMS plugin integrations (WooCommerce, Shopify, Laravel, ...) and deployed the stack on Kubernetes (Helm, multi-env) with Docker Compose for local dev.}
+    \end{cvitems}
+  }
+
+\cventry
   {AI Engineer} % Job title
   {Face Recognition System} % Organization
   {Hanoi, Vietnam} % Location
